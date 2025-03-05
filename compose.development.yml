@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  ###
+  # applications
+  ###
+
+  bifrost_app:
+    build:
+      args:
+        app: bifrost
+      context: .
+      dockerfile: ./build/package/app/Dockerfile.development
+    container_name: bifrost_app
+    env_file:
+      - ./apps/bifrost/.env
+    image: bifrost/bifrost-app
+    networks:
+      - yggdrasil
+    ports:
+      - "3000"
+    volumes:
+      - ./apps/bifrost:/usr/app:cached
+
+networks:
+  yggdrasil:
+    name: yggdrasil_dev
