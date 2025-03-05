@@ -1,9 +1,12 @@
-.PHONY: install
+scripts_dir := ./scripts
 
-all: install
+all: install setup
 
 dev:
 	docker compose -f compose.development.yml up
 
 install:
 	@go install github.com/conventionalcommit/commitlint@latest
+
+setup:
+	$(scripts_dir)/setup.sh

@@ -9,11 +9,12 @@ ARG app
 RUN apk update \
     && apk add --no-cache git
 
-WORKDIR /usr/app
+WORKDIR /usr/apps/$app
 
 # copy mod files to know which dependencies are needed
-COPY ../../../apps/$app/go.mod /usr/app
-COPY ../../../apps/$app/go.sum /usr/app
+COPY ../../../libs /usr/libs
+COPY ../../../apps/$app/go.mod /usr/apps/$app
+COPY ../../../apps/$app/go.sum /usr/apps/$app
 
 # download and verify dependencies
 RUN go mod download
@@ -32,13 +33,15 @@ RUN apk update \
     && apk add --no-cache bash make
 RUN go install github.com/githubnemo/CompileDaemon@latest
 
-WORKDIR /usr/app
+WORKDIR /usr/apps/$app
 
 # copy the dependencies
 COPY --from=installer /go/pkg /go/pkg
 
 # copy the source files and any script files
-COPY ../../../apps/$app .
-COPY ../../../scripts/dev.sh .
+COPY ../../../libs /usr/libs
+COPY ../../../apps/$app /usr/apps/$app
+COPY ../../../scripts/set_vars.sh /usr/apps/$app
+COPY ../../../scripts/dev.sh /usr/apps/$app
 
-CMD ["/bin/sh", "-c", "./start.sh"]
+CMD ["/bin/sh", "-c", "./dev.sh"]

@@ -1,8 +1,6 @@
-version: '3.5'
-
 services:
   ###
-  # applications
+  # apps
   ###
 
   bifrost_app:
@@ -14,13 +12,42 @@ services:
     container_name: bifrost_app
     env_file:
       - ./apps/bifrost/.env
-    image: bifrost/bifrost-app
+    image: yggdrasil/bifrost-app
+    networks:
+      - yggdrasil
+    ports:
+      - "8080:3000"
+    volumes:
+      # load external data
+      - ./apps/bifrost/.data:/usr/apps/bifrost/.data:cached
+      # allow to watch for changes
+      - ./apps/bifrost/cmd:/usr/apps/bifrost/cmd:cached
+      - ./apps/bifrost/internal:/usr/apps/bifrost/internal:cached
+      - ./libs:/usr/libs:cached
+
+  mimir_app:
+    build:
+      args:
+        app: mimir
+      context: .
+      dockerfile: ./build/package/app/Dockerfile.development
+    container_name: mimir_app
+    depends_on:
+      - bifrost_app
+    env_file:
+      - ./apps/mimir/.env
+    image: yggdrasil/mimir-app
     networks:
       - yggdrasil
     ports:
       - "3000"
     volumes:
-      - ./apps/bifrost:/usr/app:cached
+      # load external data
+      - ./apps/mimir/.data:/usr/apps/mimir/.data:cached
+      # allow to watch for changes
+      - ./apps/mimir/cmd:/usr/apps/mimir/cmd:cached
+      - ./apps/mimir/internal:/usr/apps/mimir/internal:cached
+      - ./libs:/usr/libs:cached
 
 networks:
   yggdrasil:

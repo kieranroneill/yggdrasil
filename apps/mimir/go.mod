@@ -1,9 +1,8 @@
-module github.com/kieranroneill/yggdrasil/apps/bifrost
+module github.com/kieranroneill/yggdrasil/apps/mimir
 
 go 1.22.4
 
 require (
-	github.com/fatih/structs v1.1.0
 	github.com/kieranroneill/yggdrasil/libs v1.0.0
 	github.com/labstack/echo/v4 v4.13.3
 	github.com/ostafen/clover/v2 v2.0.0-alpha.3
