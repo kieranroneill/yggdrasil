@@ -1,12 +1,14 @@
 scripts_dir := ./scripts
 
-all: install setup
+all: init install
 
 dev:
-	docker compose -f compose.development.yml up
+	docker compose -f ./deployment/compose.development.yml up --build
 
 install:
-	@go install github.com/conventionalcommit/commitlint@latest
+	go mod download
+	go mod verify
+	pnpm --dir web install
 
-setup:
-	$(scripts_dir)/setup.sh
+init:
+	$(scripts_dir)/init.sh

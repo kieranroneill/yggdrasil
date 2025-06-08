@@ -1,10 +1,6 @@
-<h1 align="center">
-   Yggdrasil
-</h1>
-
 <div align="center">
 
-[![License: CC0-1.0](https://img.shields.io/github/license/kieranroneill/yggdrasil)](./LICENSE)
+[![License: CC0-1.0](https://img.shields.io/github/license/kieranroneill/yggdrasil)][license]
 
 </div>
 
@@ -22,16 +18,20 @@
 
 </div>
 
+<h1 align="center">
+   Yggdrasil
+</h1>
+
 <p align="center">
-  The Yggdrasil platform is your home server in one place.
+  Yggdrasil platform is a compact home server for storage, CalDav, WebDav, CardDav and more.
 </p>
 
 #### Table of contents
 
 * [1. Overview](#-1-overview)
-  - [1.1. Project Structure](#11-project-structure)
 * [2. Development](#-2-development)
-  - [2.1. Requirements](#21-requirements)
+  - [1.1. Project Structure](#21-project-structure)
+  - [2.2. Requirements](#22-requirements)
 * [3. Appendix](#-3-appendix)
   - [3.1. Useful commands](#31-useful-commands)
 * [4. How to contribute](#-4-how-to-contribute)
@@ -47,7 +47,13 @@ The project structure is based on the layout outlined in [golang-standards/proje
 
 ## 🛠️ 2. Development
 
-### 2.1. Requirements
+### 2.1. Project structure
+
+The project structure is based on the layout outlined in [golang-standards/project-layout](https://github.com/golang-standards/project-layout).
+
+<sup>[Back to top ^][table-of-contents]</sup>
+
+### 2.2. Requirements
 
 * [Golang v1.22.4+](https://go.dev/doc/install)
 * [Make](https://www.gnu.org/software/make/)
@@ -58,30 +64,26 @@ The project structure is based on the layout outlined in [golang-standards/proje
 
 ### 3.1. Useful commands
 
-| Command        | Description                                                                             |
-|----------------|-----------------------------------------------------------------------------------------|
-| `make dev`     | Runs the platform in development mode.                                                  |
-| `make install` | Installs development tools such as commitlint.                                          |
+| Command        | Description                                                                                                                               |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `make dev`     | Runs in development mode - builds and watches.                                                                                            |
+| `make init`    | Installs development tools such as commitlint, sets up git hooks and creates a `.env` file from the `.env.example`, if one doesn't exist. |
+| `make install` | Downloads the Go modules and installs the web node modules.                                                                               |
 
 <sup>[Back to top ^][table-of-contents]</sup>
 
 ## 👏 4. How to contribute
 
-Please read the [**contributing guide**][contribute] to learn about the development process.
+Please read the [**contributing guide**](https://github.com/kieranroneill/yggdrasil/blob/main/CONTRIBUTING.md) to learn about the development process.
 
 <sup>[Back to top ^][table-of-contents]</sup>
 
 ## 📄 5. License
 
-Please refer to the [COPYING][copying] file.
+Please refer to the [LICENSE][license] file.
 
 <sup>[Back to top ^][table-of-contents]</sup>
 
-<!-- Links -->
-[contribute]: ./CONTRIBUTING.md
-[copying]: ./COPYING
-[doctl]: https://docs.digitalocean.com/reference/doctl/how-to/install/
-[doppler]: https://docs.doppler.com/docs/install-cli
-[golang]: https://go.dev/doc/install
-[make]: https://www.gnu.org/software/make/
+<!-- links -->
+[license]: https://github.com/kieranroneill/yggdrasil/blob/main/LICENSE
 [table-of-contents]: #table-of-contents

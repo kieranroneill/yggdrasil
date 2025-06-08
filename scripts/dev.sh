@@ -4,39 +4,35 @@ SCRIPT_DIR=$(dirname "${0}")
 
 source "${SCRIPT_DIR}"/set_vars.sh
 
-# Public: Injects the version and runs the Go app.
-#
-# $1 - [optional] a version to inject, otherwise the version from the VERSION file is read.
+# Public: Injects the version and builds the Go app with watch.
 #
 # Examples
 #
-#   ./bin/dev.sh # reads the version in the VERSION file
-#   ./bin/dev.sh "1.2.3"
+#   ./scripts/dev.sh
 #
 # Returns exit code 0.
 function main() {
-  local build_dir
+  local arch
+  local build_path
+  local os
   local version
 
   set_vars
 
-  build_dir="./bin"
+  arch=$(go env GOARCH)
+  os=$(go env GOOS)
+  build_path="${os}-${arch}"
 
   # get the version in the version file
   version=$(<VERSION)
 
-  # if the version argument exists, use it instead of the one on file
-  if [ -n "$1" ]; then
-    version="$1"
-  fi
-
-  VERSION=$version
-
-  # export the version as an env var
-  export VERSION
-
   printf "%b starting app...\n" "${INFO_PREFIX}"
-  CompileDaemon -build="go build -o ${build_dir} ./cmd/main.go" -command="${build_dir}"
+  CompileDaemon \
+    -build="pnpm --dir web build && go build -ldflags=-X=main.Version=${version} -o ${PWD}${BIN_DIR}/${build_path}/yggdrasil ./main.go" \
+    -command="${PWD}${BIN_DIR}/${build_path}/yggdrasil" \
+    -include="*.go" \
+    -include="*.ts" \
+    -include="*.tsx"
 
   printf "%b done!\n" "${INFO_PREFIX}"
 

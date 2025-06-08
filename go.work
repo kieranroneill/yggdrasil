@@ -1,6 +1,0 @@
-go 1.22.4
-
-use ./apps/bifrost
-use ./apps/mimir
-
-replace github.com/kieranroneill/yggdrasil/libs v1.0.0 => ./libs

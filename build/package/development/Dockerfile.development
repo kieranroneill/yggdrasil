@@ -1,0 +1,44 @@
+FROM algorand/algod:latest
+
+ENV GO_VERSION=1.22.4
+ENV GO111MODULE=on
+ENV NVM_DIR=/root/.nvm
+
+# install os dependencies
+RUN apt-get update && apt-get install -y make supervisor
+
+# install go
+RUN curl -LO https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \
+    rm go${GO_VERSION}.linux-amd64.tar.gz
+
+# install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+# installl and set the node version using nvm
+RUN . "${NVM_DIR}/nvm.sh" && \
+    nvm install 20.9.0 && \
+    nvm use 20.9.0
+
+# set go and node/npm to path env var
+ENV PATH="/usr/local/go/bin:/root/go/bin:/root/.nvm/versions/node/v20.9.0/bin:${PATH}"
+
+# install the required go dependencies: CompileDaemon
+RUN go install github.com/githubnemo/CompileDaemon@latest
+
+# install pnpm
+RUN npm install -g pnpm@10.3.0
+
+# setup supervisor
+RUN mkdir -p /var/log/supervisor
+
+WORKDIR /usr/app
+
+# copy source files
+COPY . /usr/app
+COPY ./build/package/development/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# install app dependencies
+RUN make install
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

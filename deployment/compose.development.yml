@@ -1,0 +1,23 @@
+services:
+  yggdrasil:
+    build:
+      context: ../
+      dockerfile: ./build/package/development/Dockerfile.development
+    container_name: yggdrasil
+    env_file:
+      - ../.env
+    image: kieranroneill/yggdrasil-app
+    networks:
+      - yggdrasil_network
+    ports:
+      - "8080:3000" # yggdrasil
+    volumes:
+      - ../.config:/root/.config/yggdrasil:cached
+      # watch for changes on source code
+      - ../internal:/usr/app/internal:cached
+      - ../main.go:/usr/app/main.go:cached
+      - ../web/src:/usr/app/web/src:cached
+
+networks:
+  yggdrasil_network:
+    name: yggdrasil_dev

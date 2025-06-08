@@ -1,0 +1,31 @@
+{
+  "name": "yggdrasil",
+  "private": false,
+  "engines": {
+    "node": ">=20.18.0"
+  },
+  "packageManager": "pnpm@10.3.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "3.x",
+    "@emotion/react": ">=11.x",
+    "i18next": "^25.1.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-i18next": "^15.5.1"
+  }
+}
