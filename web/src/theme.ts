@@ -21,7 +21,7 @@ export default createSystem(
       tokens: {
         colors: {
           algorand: {
-            50:  { value: '#000000' },
+            50: { value: '#000000' },
             100: { value: '#000000' },
             200: { value: '#000000' },
             300: { value: '#000000' },
@@ -33,7 +33,7 @@ export default createSystem(
             900: { value: '#ffffff' },
           },
           primaryDark: {
-            50:  { value: '#F6E9FF' },
+            50: { value: '#F6E9FF' },
             100: { value: '#F2DEFF' },
             200: { value: '#EED3FF' },
             300: { value: '#E9C8FF' },
@@ -45,7 +45,7 @@ export default createSystem(
             900: { value: '#6F00BA' },
           },
           primaryLight: {
-            50:  { value: '#F59CFD' },
+            50: { value: '#F59CFD' },
             100: { value: '#F16AFD' },
             200: { value: '#EC39FC' },
             300: { value: '#E707FB' },
@@ -57,7 +57,7 @@ export default createSystem(
             900: { value: '#3D0143' },
           },
           voi: {
-            50:  { value: '#d9c7f7' },
+            50: { value: '#d9c7f7' },
             100: { value: '#bb9af1' },
             200: { value: '#ac84ee' },
             300: { value: '#9d6deb' },

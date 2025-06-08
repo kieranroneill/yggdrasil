@@ -20,7 +20,7 @@ function main() {
   go install github.com/conventionalcommit/commitlint@latest
 
   printf "%b setting git hooks \n" "${INFO_PREFIX}"
-  git config core.hooksPath "${PWD}/.commitlint/hooks"
+  git config core.hooksPath "${PWD}/.hooks"
 
   env_example_file=".env.example"
 
