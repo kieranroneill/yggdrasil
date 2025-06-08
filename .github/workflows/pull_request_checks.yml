@@ -37,7 +37,7 @@ jobs:
           echo "${{ steps.get_pr_title.outputs.result }}" | commitlint lint
 
   ##
-  # build
+  # build and lint
   ##
 
   build:
@@ -55,8 +55,9 @@ jobs:
       - name: "🏗️ Build"
         run: ./scripts/build.sh
 
-  lint_web:
-    name: "Lint:web"
+  lint_web_app:
+    name: "Lint web app"
+    needs: [validate_pr_title]
     runs-on: ubuntu-latest
     steps:
       - name: "🛎 Checkout"
