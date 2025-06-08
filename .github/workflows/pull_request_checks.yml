@@ -54,3 +54,14 @@ jobs:
         uses: ./.github/actions/use-pnpm-dependencies
       - name: "🏗️ Build"
         run: ./scripts/build.sh
+
+  lint_web:
+    name: "Lint:web"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🛎 Checkout"
+        uses: actions/checkout@v4
+      - name: "📦 Install Node dependencies"
+        uses: ./.github/actions/use-pnpm-dependencies
+      - name: "👕 Lint"
+        run: pnpm --dir web lint
