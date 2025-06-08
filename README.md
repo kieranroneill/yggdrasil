@@ -23,7 +23,7 @@
 </h1>
 
 <p align="center">
-  Yggdrasil platform is a compact home server for storage, CalDav, WebDav, CardDav and more.
+  Yggdrasil is a compact home server for storage, CalDav, WebDav, CardDav and more.
 </p>
 
 #### Table of contents
